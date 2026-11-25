@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "shika"
+version = "0.1.0"
+description = "名片照片进通讯录：模型只负责读字，每个字段的出处都要回原文核对"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+
+[project.scripts]
+shika = "shika.cli:main"
+
+[tool.setuptools]
+packages = ["shika"]
