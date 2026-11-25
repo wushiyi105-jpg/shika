@@ -8,7 +8,7 @@ Shika does something narrow: **one card photo in, one contact out**. Fields go i
 
 Narrow in how the work is split: **the model only reads the characters; field mapping, format checks and duplicate merging all happen locally**. And every field has to say which line of the card it came from — the program then goes back to that line to check. If it is not there, it is not recorded.
 
-![demo](assets/demo.gif)
+![usage](assets/demo.gif)
 
 ## Why "source" has to exist
 
@@ -124,7 +124,7 @@ That step is deliberate. Auto-saving looks smoother, but one wrong digit is some
 
 ## Design trade-offs
 
-- **Zero third-party dependencies**, Python 3.10+ standard library. Pillow appears in exactly two places: shrinking images over 900KB, and generating the demo GIF during development.
+- **Zero third-party dependencies**, Python 3.10+ standard library. Pillow appears in exactly two places: shrinking images over 900KB, and generating the usage GIF during development.
 - **If shrinking fails, send it as-is.** Not a valid image, or no Pillow in the environment — send the raw bytes and let the API complain. Locally declaring an odd byte stream "unreadable image" hides the real reason.
 - **No contact details still saves, with a warning.** A card with only a name and company is genuinely useless, but it is at least a record; `validate` says plainly "not a single contact method, this card is unusable" without blocking it.
 - **Deleting a person deletes the cards.** Cards are that person's evidence; keeping evidence with no person is pointless.
