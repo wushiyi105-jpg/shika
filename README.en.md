@@ -105,6 +105,53 @@ Start the Web UI:
 python -m shika serve      # http://127.0.0.1:8773
 ```
 
+Run in Docker (the container uses the default port 8773):
+
+```bash
+docker build -t shika .
+docker run -p 8773:8773 shika
+```
+
+## 🤔 Why not just ask a general LLM
+
+A general model can look at a card photo and say "this is Zhang San from Such-and-such". Shika adds the three things it cannot:
+
+1. **Fields can be verified** — every field records which line of the card it came from, and the program checks that line before storing it; a mismatch means it is not saved. Chat models like to "helpfully" complete a company address or a phone number, and you end up believing the card said so.
+2. **Reproducible results** — the model only reads characters; field mapping, format validation and merging several cards of one person all happen locally, so the same card yields the same contact twice.
+3. **Contacts stay local** — a card is someone else's personal data; results sit in local SQLite and only an explicit `export --vcf` produces a file for your phone. The address book is never uploaded.
+4. **Structured output** — one card in, one contact out, with fixed fields and vCard export. A chat reply is prose you would retype into your contacts.
+
+## 🎯 Use cases
+
+- **A pile of cards after a trade show**: feed them in one by one back at the hotel and have fields mapped automatically; search by company or industry the next day instead of scrolling the photo album.
+- **Moving to a new phone**: import half a year of cards at once and `export --vcf` into a single file your phone can read.
+- **Finding "the supply-chain person from last time"**: search by name, company or note, with the original photo still on this machine to check.
+
+## 🗺 Roadmap
+
+- **Batch import**: point at a directory, recognise each card and summarise, listing the failures separately.
+- **Back-side notes**: accept a photo of the card's back and merge handwritten notes such as "talked about cold chain" into the note field.
+- **Company name normalisation**: fold abbreviations and English names of the same company together for cleaner filtering.
+- **Visible merge policy**: when one person has several cards, show which card overrode which and where each field came from.
+- **CSV export**: alongside vCard, a CSV for spreadsheets or a CRM.
+
+## ❓ FAQ
+
+**Where do I get an API key?**
+A vision model is needed: a multimodal key such as Zhipu's `glm-4.6v-flashx`, set as `VISION_API_KEY` in `.env` (a text-model key can be the same one). A text-only model cannot read images.
+
+**Where is data stored, and is it uploaded?**
+Card paths and recognition results live in local SQLite (default `data/shika.db`); a model call sends the current image only, not the address book.
+
+**Does it work without a key?**
+It cannot read new cards, only browse and export stored contacts. The image step cannot avoid a multimodal model.
+
+**How do I switch models?**
+Change `VISION_BASE_URL`, `VISION_MODEL` and `VISION_API_KEY` as in `.env.example`; field mapping logic is unaffected.
+
+**Can it read handwritten cards?**
+It can try, with lower accuracy. That is why every field cites its line, so a misread is visible during verification rather than silently saved.
+
 ## Commands
 
 | Command | What it does |
