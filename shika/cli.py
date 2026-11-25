@@ -165,9 +165,9 @@ def build_parser() -> argparse.ArgumentParser:
     a.add_argument("--json", action="store_true")
     a.set_defaults(func=cmd_add)
 
-    l = sub.add_parser("list", help="通讯录")
-    l.add_argument("keyword", nargs="?", default="")
-    l.set_defaults(func=cmd_list)
+    lst = sub.add_parser("list", help="通讯录")
+    lst.add_argument("keyword", nargs="?", default="")
+    lst.set_defaults(func=cmd_list)
 
     s = sub.add_parser("show", help="看一个联系人和他的来源卡")
     s.add_argument("id", type=int)

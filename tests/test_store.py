@@ -3,7 +3,6 @@ import unittest
 
 from shika import contacts, store
 
-
 CARD = {"name": "林知远", "company": "星野科技", "title": "产品总监",
         "mobile": "13800138000", "tel": "", "email": "lin.zhiyuan@xingye.com",
         "address": "", "note": "展会认识"}

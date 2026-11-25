@@ -1,6 +1,6 @@
 # 识卡 shika
 
-[![test](https://github.com/wushiyi105-jpg/shika/workflows/test/badge.svg)](https://github.com/wushiyi105-jpg/shika/actions) [![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white)]() [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
+[![test](https://github.com/wushiyi105-jpg/shika/workflows/test/badge.svg)](https://github.com/wushiyi105-jpg/shika/actions) [![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white)]() [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE) [![codecov](https://codecov.io/gh/wushiyi105-jpg/shika/branch/main/graph/badge.svg)](https://codecov.io/gh/wushiyi105-jpg/shika)
 
 出差回来一沓名片，摆三个月就分不清谁是谁。拍了照也没用——相册里一堆照片，找人还得一张一张翻。
 
@@ -71,6 +71,21 @@
 命中之后不新建，而是 `merge`：空字段用新的填，非空字段保留更长的那个（「星野科技」和「星野科技（深圳）」之间选后者）。两张卡的备注用「；」连起来，去重。
 
 每次识别都会单独留一条 `cards` 记录（原文行、字段、把握、问题清单），所以「这条手机号是哪张卡读来的」永远查得到。`show` 命令就是干这个的。
+
+## 数据流
+
+一条数据在这几个模块之间怎么走：
+
+```mermaid
+flowchart LR
+    A[名片照片] --> B[reader.py<br/>视觉模型读字 + 记行号]
+    B --> C[contacts.py<br/>字段归位 · 格式校验]
+    C --> D{出处回查<br/>那一行里有没有这一段}
+    D -->|查不到| E[字段清空]
+    D -->|查得到| F[store.py<br/>入库 · 同人去重合并]
+    F --> G[cli.py / web.py<br/>联系人卡 + 来源原文]
+    F --> H[导出 vcf]
+```
 
 ## 快速开始
 

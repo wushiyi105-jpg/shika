@@ -56,7 +56,7 @@ def normalize_email(text: str) -> str:
     s = s.replace("＠", "@").replace("。", ".")
     s = re.sub(r"\s+", "", s)
     # 名片上常见 "lin.zhiyuan(at)xingye.com" 这种防爬写法
-    s = re.sub(r"\(at\)|\[at\]|（at）", "@", s, flags=re.I)
+    s = re.sub(r"\(at\)|\[at\]|（at）", "@", s, flags=re.IGNORECASE)
     return s.lower() if _EMAIL_RE.match(s) else ""
 
 
