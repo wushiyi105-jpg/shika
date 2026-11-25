@@ -1,5 +1,7 @@
 # 识卡 shika
 
+[![test](https://github.com/wushiyi105-jpg/shika/workflows/test/badge.svg)](https://github.com/wushiyi105-jpg/shika/actions)
+
 出差回来一沓名片，摆三个月就分不清谁是谁。拍了照也没用——相册里一堆照片，找人还得一张一张翻。
 
 识卡做的事很窄：**一张名片照片进去，一条联系人出来**。字段进通讯录，能搜、能导进手机。
