@@ -204,6 +204,4 @@ VISION_MODEL=glm-4.6v-flashx
 
 ---
 
-作者：shiyi
-邮箱：wushiyi105@gmail.com
-GitHub：[wushiyi105-jpg](https://github.com/wushiyi105-jpg)
+作者：罗之之 · 15071889700

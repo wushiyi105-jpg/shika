@@ -204,6 +204,4 @@ The vision channel has its own variables and falls back to `LLM_*` when unset. W
 
 ---
 
-Author: shiyi
-Email: wushiyi105@gmail.com
-GitHub: [wushiyi105-jpg](https://github.com/wushiyi105-jpg)
+Luo Zhizhi · 15071889700
