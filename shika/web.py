@@ -21,7 +21,7 @@ UPLOAD_DIR = os.path.join("data", "uploads")
 PAGE = """<!doctype html>
 <html lang="zh-CN"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>识卡 · 名片进通讯录</title>
+<title>识卡 · 半小时清完一叠名片</title>
 <style>
 *{box-sizing:border-box}
 body{margin:0;background:#0b0f14;color:#c9d1d9;font:15px/1.65 -apple-system,"Segoe UI","Microsoft YaHei",sans-serif}
@@ -47,8 +47,76 @@ pre{background:#161b22;border-radius:8px;padding:10px;overflow:auto;font-size:12
 img.prev{max-width:100%;border-radius:8px;border:1px solid #21262d}
 .item{padding:8px 10px;border-radius:6px;cursor:pointer}
 .item:hover{background:#161b22}
+
+:root{--maxw:1060px;--bg:#f2ebdf;--card:#fffdf8;--ink:#28231d;--text:#28231d;--dim:#71675b;--line:#d8ccbb;--accent:#9b6234;--muted:#71675b}
+.wrap{max-width:1060px}
+body{background:#f2ebdf;color:#28231d;font-family:"PingFang SC","Microsoft YaHei",sans-serif}
+h1{color:#28231d}
+header{max-width:1060px;margin:0 auto}
+input,textarea,select{background:#fff;color:#28231d;border-color:#d8ccbb;border-radius:2px}
+button:not(.ghost):not(.tab){background:#9b6234;color:#fff;border-radius:2px}
+button.ghost{background:transparent!important;color:#9b6234!important;border:1px solid #d8ccbb!important}
+h2,h3{color:#9b6234}
+pre{background:#fafaf6;color:#28231d;border-color:#d8ccbb}
+.item,.card{border-color:#d8ccbb;background:#fffdf8}
+.k,.empty,.hint{color:#71675b}
+
+h1{font-size:clamp(31px,5vw,39px);line-height:1.26}
+.prod{display:block;font-size:11px;line-height:1.4;letter-spacing:.18em;font-weight:650;margin-bottom:8px;opacity:.72}
+.lede,.sub{max-width:62ch;line-height:1.75}
+.route{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;margin:16px auto 20px;border:1px solid var(--line);background:var(--line);max-width:var(--maxw)}
+.route span{padding:11px 13px;background:var(--card);font-size:12px;line-height:1.5}
+.route b{display:block;font-size:10px;letter-spacing:.1em;margin-bottom:3px;opacity:.66}
+button{min-height:46px}
+input,select{min-height:44px}
+pre{white-space:pre-wrap}
+@media(max-width:680px){
+  .wrap{padding:20px 16px 56px}
+  .route{grid-template-columns:1fr}
+  h1{font-size:30px!important}
+  .row>div{min-width:100%!important}
+  button{width:100%}
+}
+
+body{background:#f2ebdf;color:#28231d}
+header{display:block!important;max-width:1060px;margin:0 auto;padding:24px 20px 0;background:transparent;border:0}
+header h1{color:#28231d;font-size:38px;line-height:1.24;letter-spacing:-.02em}
+header .sub{display:block;color:#71675b;font-size:14px;margin-top:6px}
+main{max-width:1060px;margin:0 auto;background:#fffdf8;border-left:1px solid #d8ccbb;border-right:1px solid #d8ccbb;grid-template-columns:350px 1fr;min-height:calc(100vh - 150px)}
+aside{background:#f8f2e8;border-right:1px solid #d8ccbb}
+section{background:#fffdf8}
+input,textarea,select{background:#fff;color:#28231d;border-color:#d3c5b2;border-radius:2px}
+input:focus,textarea:focus,select:focus{border-color:#9b6234;box-shadow:0 0 0 2px #eadfce}
+button{background:#9b6234;color:#fff;border-radius:2px}
+button:hover{background:#84522a}
+.drop{border:1px dashed #b89a75;background:#fff;color:#71675b;border-radius:2px}
+.drop:hover{border-color:#9b6234;color:#28231d}
+h2{color:#7a4b26;font-size:14px;letter-spacing:.06em}
+.item,.card{border-color:#d8ccbb;background:#fff}
+.empty,.k{color:#71675b}
+
+
+/* mobile-32 */
+input[type=text],input[type=number],input[type=email]{background:#fff;color:#28231d;border-color:#d8ccbb}
+
+@media(max-width:760px){
+  main{grid-template-columns:1fr!important}
+  aside{border-right:0!important;border-bottom:1px solid #d8ccbb;width:auto!important}
+  section{padding:16px!important}
+  .row{flex-wrap:wrap!important}
+  .row>div{min-width:100%!important}
+  h1{font-size:30px!important}
+  .route{grid-template-columns:1fr!important}
+  button{min-height:48px}
+  pre{overflow-x:auto}
+}
+
+/* mobile-height */
+@media(max-width:760px){main{min-height:auto!important}aside{min-height:0!important}}
 </style></head><body>
-<header><h1>识卡</h1><span class="sub">拍一张名片，字段进通讯录——每个字段都能追到卡片上的那一行</span></header>
+<header><h1><span class="prod">识卡</span>这叠名片，半小时清完</h1><p class="lede">给展会后要整理联系人的人：批量拍名片，逐张确认姓名、公司、电话、邮箱并定位原图；疑似重复可合并，也可分别存。</p></header>
+  <div class="route" aria-label="任务步骤"><span><b>01</b>批量拍名片</span><span><b>02</b>逐张确认字段</span><span><b>03</b>导出 vCard / CSV</span></div>
+
 <main>
 <aside>
   <h2>新名片</h2>
